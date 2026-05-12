@@ -25,7 +25,7 @@ async function HomePageContent() {
 
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
-        <h1 className="text-5xl font-bold tracking-tight text-white sm:text-7xl">{t('title')}</h1>
+        <h1 className="font-groovello text-5xl font-bold tracking-tight text-white sm:text-7xl">{t('title')}</h1>
         <p className="max-w-xl text-lg text-white/80">{t('description')}</p>
         <NextLink href="/login" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
           {t('cta')}
