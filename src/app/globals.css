@@ -10,9 +10,9 @@
 }
 
 .dark {
-  --background: #2b061e;
-  --foreground: #875053;
-  --primary: #d2bf55;
+  --background: #251605;
+  --foreground: #f7dba7;
+  --primary: #cc6a00;
   --secondary: #ffeed6;
   --success: #306b34;
 }
