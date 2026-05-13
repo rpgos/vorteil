@@ -8,6 +8,12 @@ type Props = {
   params: Promise<{ locale: string }>
 }
 
+const heroImagePaths = [
+  'photo-1777996625863-8f9713811fb5',
+  'photo-1777996625814-028201238572',
+  'photo-1777996625750-b934896792b9',
+]
+
 export default function HomePage({ params }: Props) {
   const { locale } = use(params)
   setRequestLocale(locale)
@@ -18,10 +24,18 @@ export default function HomePage({ params }: Props) {
 async function HomePageContent() {
   const t = await getTranslations('Home')
 
+  const heroImage = heroImagePaths[Math.floor(Math.random() * heroImagePaths.length)]
+
   return (
     <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden">
       {/* Background image */}
-      <Image src="/court1.jpg" alt="Tennis court" fill className="object-cover brightness-50" priority />
+      <Image
+        src={`https://images.unsplash.com/${heroImage}`}
+        alt="Tennis court"
+        fill
+        className="object-cover brightness-50"
+        priority
+      />
 
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
