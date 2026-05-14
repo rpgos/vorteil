@@ -1,8 +1,16 @@
 {
+  "Header": {
+    "login": "Login",
+    "about": "Sobre"
+  },
+  "NotFound": {
+    "heading": "Essa bola foi fora! 0-15",
+    "cta": "Vamos continuar"
+  },
   "Home": {
     "title": "Vorteil",
     "subtitle": "Ligas de ténis competitivas para todos",
-    "description": "Junte-se à sua liga de ténis amadora local, acompanhe os seus jogos e suba no ranking.",
+    "description": "Junta-te à tua liga de ténis amadora local, acompanha os jogos e sobe no ranking.",
     "cta": "Começar a jogar"
   }
 }

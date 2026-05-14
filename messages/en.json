@@ -1,4 +1,12 @@
 {
+  "Header": {
+    "login": "Login",
+    "about": "About"
+  },
+  "NotFound": {
+    "heading": "That shot was out! 0-15",
+    "cta": "Let's move on"
+  },
   "Home": {
     "title": "Vorteil",
     "subtitle": "Competitive tennis leagues for everyone",

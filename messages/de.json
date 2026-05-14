@@ -1,4 +1,12 @@
 {
+  "Header": {
+    "login": "Anmelden",
+    "about": "Über uns"
+  },
+  "NotFound": {
+    "heading": "Der Ball war aus! 0-15",
+    "cta": "Weiter geht's"
+  },
   "Home": {
     "title": "Vorteil",
     "subtitle": "Wettbewerbliche Tennisligen für alle",
