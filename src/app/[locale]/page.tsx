@@ -28,7 +28,6 @@ async function HomePageContent() {
 
   return (
     <main className="relative flex flex-1 flex-col items-center justify-center overflow-hidden">
-      {/* Background image */}
       <Image
         src={`https://images.unsplash.com/${heroImage}`}
         alt="Tennis court"
@@ -39,8 +38,8 @@ async function HomePageContent() {
 
       {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
-        <h1 className="font-groovello text-5xl font-bold tracking-tight text-white sm:text-7xl">{t('title')}</h1>
-        <p className="max-w-xl text-lg text-white/80">{t('description')}</p>
+        <h1 className="font-groovello text-5xl font-bold tracking-tight sm:text-7xl">{t('title')}</h1>
+        <p className="max-w-xl text-lg">{t('description')}</p>
         <NextLink href="/login" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
           {t('cta')}
         </NextLink>

@@ -1,17 +1,12 @@
 import type { Metadata } from 'next'
 import localFont from 'next/font/local'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist_Mono } from 'next/font/google'
 import { ThemeProvider } from 'next-themes'
 import { hasLocale } from 'next-intl'
 import { setRequestLocale } from 'next-intl/server'
 import { notFound } from 'next/navigation'
 import { routing } from '@/i18n/routing'
 import '../globals.css'
-
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin'],
-})
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -21,6 +16,11 @@ const geistMono = Geist_Mono({
 const groovello = localFont({
   src: '../../../public/fonts/Groovello.ttf',
   variable: '--font-groovello',
+})
+
+const bricolage = localFont({
+  src: '../../../public/fonts/BricolageGrotesque.ttf',
+  variable: '--font-bricolage-grotesque',
 })
 
 export const metadata: Metadata = {
@@ -49,7 +49,7 @@ export default async function LocaleLayout({ children, params }: Props) {
     <html
       lang={locale}
       suppressHydrationWarning
-      className={`${geistSans.variable} ${geistMono.variable} ${groovello.variable} h-full antialiased`}
+      className={`${bricolage.variable} ${geistMono.variable} ${groovello.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
         <ThemeProvider attribute="class" defaultTheme="dark">
