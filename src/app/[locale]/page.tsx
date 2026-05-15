@@ -43,8 +43,8 @@ export default async function HomePage({ params }: Props) {
       />
 
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
-        <h1 className="font-groovello text-5xl font-bold tracking-tight sm:text-7xl">{t('title')}</h1>
-        <p className="max-w-xl text-lg">{t('description')}</p>
+        <h1 className="whitespace-pre-line text-white text-5xl md:text-6xl">{t('title')}</h1>
+        <p className="max-w-xl text-lg text-white">{t('description')}</p>
         <NextLink href="/leagues" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
           {t('cta')}
         </NextLink>
