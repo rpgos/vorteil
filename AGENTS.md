@@ -82,6 +82,8 @@ Strong success criteria let you loop independently. Weak criteria ("make it work
 - Use functional patterns where possible.
 - Use HeroUI components.
 - Use kebab-case for .tsx files and camelCase for .ts files.
+- When fetching data in a Server Component, prefer async and await over use. async and await pick up rendering from the point where await was invoked, whereas use re-renders the component after the data is resolved.
+- Prefer creating Promises in Server Components and passing them to Client Components over creating Promises in Client Components. Promises created in Client Components are recreated on every render. Promises passed from a Server Component to a Client Component are stable across re-renders.
 
 ---
 
