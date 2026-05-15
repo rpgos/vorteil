@@ -179,11 +179,11 @@ Create a custom 404 page. It should have a button to go back to the site, and a 
 
 Let's create a nice, minimal and modern landing page. We have a few images already on the `src/app/[locale]/page.tsx` file, array named `heroImagePaths` we can use to create a nice UI. Let's use external URLs for the images for now, as saving those high-quality images in our repo wouldn't be practical.
 
-1. Use HeroUI for components (it's already installed)
+1. [DONE] Use HeroUI for components (it's already installed)
 
-2. Let's start by creating a hero section with a nice image and a button to go to a page (TBD). The button for now can say "Start playing"
+2. [DONE] Let's start by creating a hero section with a nice image and a button to go to a page (TBD). The button for now can say "Start playing"
 
-3. The hero CTA should link to `/register` for logged-out users and `/leagues` for logged-in users. Resolve this on the server using `getOptionalSession()`.
+3. Add 3 sections after the hero. Create a reusable component that has an image on the right/left and text on the opposite side. The component should receive as a prop the side of the image and render accordingly. The component should receive an `imageUrl` prop. If the image url is not passed, the section should have centered text. It should also allow children to be passed that will be rendered under the subtitle.
 
 # 7. Data model and server-action scaffolding
 
