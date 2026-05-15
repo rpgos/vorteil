@@ -1,5 +1,5 @@
-import { use } from 'react';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
+import type { Metadata } from 'next';
 import Image from 'next/image';
 import NextLink from 'next/link';
 import { buttonVariants } from '@heroui/react';
@@ -15,16 +15,21 @@ const heroImagePaths = [
   'photo-1604259011171-2343696f776b',
 ];
 
-export default function HomePage({ params }: Props) {
-  const { locale } = use(params);
-  setRequestLocale(locale);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  const t = await getTranslations({ locale, namespace: 'Home' });
 
-  return <HomePageContent />;
+  return {
+    title: t('metaTitle'),
+    description: t('metaDescription'),
+  };
 }
 
-async function HomePageContent() {
-  const t = await getTranslations('Home');
+export default async function HomePage({ params }: Props) {
+  const { locale } = await params;
+  setRequestLocale(locale);
 
+  const t = await getTranslations('Home');
   const heroImage = heroImagePaths[Math.floor(Math.random() * heroImagePaths.length)];
 
   return (
@@ -37,11 +42,10 @@ async function HomePageContent() {
         priority
       />
 
-      {/* Hero content */}
       <div className="relative z-10 flex flex-col items-center gap-6 px-6 text-center">
         <h1 className="font-groovello text-5xl font-bold tracking-tight sm:text-7xl">{t('title')}</h1>
         <p className="max-w-xl text-lg">{t('description')}</p>
-        <NextLink href="/login" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
+        <NextLink href="/leagues" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
           {t('cta')}
         </NextLink>
       </div>
