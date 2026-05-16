@@ -175,7 +175,7 @@ Create a custom 404 page. It should have a button to go back to the site, and a 
 
 3. [DONE] Add a primary button saying "Let's move on"
 
-# 6. Landing page
+# 6. [DONE] Landing page
 
 Let's create a nice, minimal and modern landing page. We have a few images already on the `src/app/[locale]/page.tsx` file, array named `heroImagePaths` we can use to create a nice UI. Let's use external URLs for the images for now, as saving those high-quality images in our repo wouldn't be practical.
 
@@ -183,9 +183,9 @@ Let's create a nice, minimal and modern landing page. We have a few images alrea
 
 2. [DONE] Let's start by creating a hero section with a nice image and a button to go to a page (TBD). The button for now can say "Start playing"
 
-3. Add 3 sections after the hero. Create a reusable component that has an image on the right/left and text on the opposite side. The component should receive as a prop the side of the image and render accordingly. The component should receive an `imageUrl` prop. If the image url is not passed, the section should have centered text. It should also allow children to be passed that will be rendered under the subtitle.
+3. [DONE] Add 3 sections after the hero. Create a reusable component that has an image on the right/left and text on the opposite side. The component should receive as a prop the side of the image and render accordingly. The component should receive an `imageUrl` prop. If the image url is not passed, the section should have centered text. It should also allow children to be passed that will be rendered under the subtitle.
 
-# 7. Data model and server-action scaffolding
+# 7. [DONE] Data model and server-action scaffolding
 
 Set up the conventions every later feature will use. Nothing here ships a user-visible page; it's the foundation for all the work that follows.
 
