@@ -1,5 +1,7 @@
 import { cookies } from 'next/headers';
 
+const COOKIE_NAME = 'vorteil_session';
+
 export type Session = {
   userId: string;
   email: string;
@@ -22,7 +24,7 @@ export async function getOptionalSession(): Promise<Session | null> {
   }
 
   const cookieStore = await cookies();
-  const raw = cookieStore.get('vorteil_session')?.value;
+  const raw = cookieStore.get(COOKIE_NAME)?.value;
   if (!raw) return null;
 
   try {
@@ -30,4 +32,18 @@ export async function getOptionalSession(): Promise<Session | null> {
   } catch {
     return null;
   }
+}
+
+export async function setSession(session: Session): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.set(COOKIE_NAME, JSON.stringify(session), {
+    httpOnly: true,
+    path: '/',
+    sameSite: 'lax',
+  });
+}
+
+export async function clearSession(): Promise<void> {
+  const cookieStore = await cookies();
+  cookieStore.delete(COOKIE_NAME);
 }

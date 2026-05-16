@@ -205,7 +205,7 @@ Set up the conventions every later feature will use. Nothing here ships a user-v
 
 5. Decide on a single error-code vocabulary for `ActionResult` failures (`VALIDATION`, `UNAUTHENTICATED`, `FORBIDDEN`, `NOT_FOUND`, `CONFLICT`, `RATE_LIMITED`, `INTERNAL`) and document it in `src/types/action.ts`. The UI maps these to localized toasts.
 
-# 8. Authentication
+# 8. Authentication [DONE]
 
 Magic link + Google/Apple OAuth. Supabase Auth will provide this later; stub the server actions now so the UI is complete.
 
