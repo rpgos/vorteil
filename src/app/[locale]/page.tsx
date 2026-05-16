@@ -77,7 +77,7 @@ export default async function HomePage({ params }: Props) {
       </ContentSection>
 
       <ContentSection title={t('section3Title')} subtitle={t('section3Subtitle')}>
-        <NextLink href="/leagues" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
+        <NextLink href="/register" className={buttonVariants({ variant: 'primary', size: 'lg' })}>
           {t('cta_register')}
         </NextLink>
         <NextLink href="/leagues" className={buttonVariants({ variant: 'tertiary', size: 'lg' })}>
