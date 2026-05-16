@@ -155,7 +155,9 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
         <Separator />
 
         <div className="flex flex-col gap-1">
-          <Label htmlFor="city">{labels.cityLabel}</Label>
+          <Label isRequired htmlFor="city">
+            {labels.cityLabel}
+          </Label>
           <Input id="city" name="city" type="text" placeholder={labels.cityPlaceholder} autoComplete="address-level2" />
           <FieldError message={err('city')} />
         </div>

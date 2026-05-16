@@ -40,7 +40,8 @@ export default async function LoginPage({ params }: Props) {
   };
 
   return (
-    <main className="flex min-h-[calc(100vh-4rem)] items-center justify-center p-4">
+    <main className="flex flex-col min-h-[calc(100vh-4rem)] items-center justify-center p-4 gap-4">
+      <h1 className="text-3xl font-bold">{t('pageTitle')}</h1>
       <LoginForm labels={labels} />
     </main>
   );

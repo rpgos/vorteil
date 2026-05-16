@@ -1,4 +1,5 @@
 import { cookies } from 'next/headers';
+import { Role } from '@/types/auth';
 
 const COOKIE_NAME = 'vorteil_session';
 
@@ -6,6 +7,7 @@ export type Session = {
   userId: string;
   email: string;
   registrationComplete: boolean;
+  roles: Role[];
 };
 
 /**

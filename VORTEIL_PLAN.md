@@ -243,7 +243,7 @@ Magic link + Google/Apple OAuth. Supabase Auth will provide this later; stub the
 
 10. e2e test stub: hitting `/login` renders the form.
 
-# 9. Registration
+# 9. Registration [DONE]
 
 Route `/register` for collecting profile info after the first sign-in.
 

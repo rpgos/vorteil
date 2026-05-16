@@ -13,6 +13,7 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
     userId: 'stub-user-1',
     email: 'stub@example.com',
     registrationComplete: true,
+    roles: ['player'],
   });
 
   return NextResponse.redirect(new URL(`/`, request.url));
