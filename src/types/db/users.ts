@@ -1,6 +1,6 @@
 import type { Role } from '@/types/auth';
 
-export type Gender = 'female' | 'male' | 'non_binary' | 'prefer_not_to_say';
+export type Gender = 'female' | 'male';
 export type SkillLevel = 'beginner' | 'intermediate' | 'advanced' | 'pro';
 export type DominantHand = 'right' | 'left';
 
@@ -9,7 +9,7 @@ export type User = {
   email: string;
   name: string;
   gender: Gender;
-  /** German LK ranking 1.0–23.0; null if not provided */
+  /** German LK ranking 1.0–25.0; null if not provided */
   lkLevel: number | null;
   /** Required when lkLevel is null */
   level: SkillLevel;

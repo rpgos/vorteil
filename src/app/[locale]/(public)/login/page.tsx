@@ -1,6 +1,8 @@
+import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import LoginForm, { type LoginFormLabels } from '@/components/forms/login-form';
+import { getOptionalSession } from '@/server/auth/session';
 
 type Props = { params: Promise<{ locale: string }> };
 
@@ -17,6 +19,9 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function LoginPage({ params }: Props) {
   const { locale } = await params;
   setRequestLocale(locale);
+
+  const session = await getOptionalSession();
+  if (session) redirect('/');
 
   const t = await getTranslations({ locale, namespace: 'Auth' });
 

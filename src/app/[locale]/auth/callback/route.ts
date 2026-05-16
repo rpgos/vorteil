@@ -12,8 +12,8 @@ export async function GET(request: NextRequest, { params }: { params: Promise<{ 
   await setSession({
     userId: 'stub-user-1',
     email: 'stub@example.com',
-    registrationComplete: false,
+    registrationComplete: true,
   });
 
-  return NextResponse.redirect(new URL(`/${locale}/register`, request.url));
+  return NextResponse.redirect(new URL(`/`, request.url));
 }

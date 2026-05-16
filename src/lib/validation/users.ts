@@ -1,6 +1,6 @@
 import { z } from 'zod';
 
-export const genderSchema = z.enum(['female', 'male', 'non_binary', 'prefer_not_to_say']);
+export const genderSchema = z.enum(['female', 'male']);
 export const skillLevelSchema = z.enum(['beginner', 'intermediate', 'advanced', 'pro']);
 export const dominantHandSchema = z.enum(['right', 'left']);
 
@@ -9,8 +9,8 @@ export const createUserSchema = z
     email: z.string().trim().toLowerCase().email('Invalid email address'),
     name: z.string().min(1, 'Name is required').max(100, 'Name is too long'),
     gender: genderSchema,
-    /** LK ranking 1.0–23.0, one decimal place */
-    lkLevel: z.number().min(1, 'LK level must be at least 1.0').max(23, 'LK level must be at most 23.0').optional(),
+    /** LK ranking 1.0–25.0, one decimal place */
+    lkLevel: z.number().min(1, 'LK level must be at least 1.0').max(25, 'LK level must be at most 25.0').optional(),
     level: skillLevelSchema.optional(),
     city: z.string().min(1, 'City is required').max(100, 'City is too long'),
     dominantHand: dominantHandSchema.optional(),

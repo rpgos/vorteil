@@ -256,7 +256,7 @@ Route `/register` for collecting profile info after the first sign-in.
    - **email** — read-only, pre-filled from session.
    - **name** — full real name.
    - **gender** — Female / Male / Non-binary / Prefer not to say.
-   - **lkLevel** — optional number (German LK ranking; range hint 1.0–23.0, one decimal).
+   - **lkLevel** — optional number (German LK ranking; range hint 1.0–25.0, one decimal).
    - **level** — Beginner / Intermediate / Advanced / Pro; only required if `lkLevel` is blank.
    - **city** — free text, German cities only for now (no validated list yet — typo tolerance is acceptable while the playerbase is small).
 
