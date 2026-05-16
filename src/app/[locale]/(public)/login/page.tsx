@@ -35,6 +35,8 @@ export default async function LoginPage({ params }: Props) {
     orDivider: t('orDivider'),
     errorInvalidEmail: t('errorInvalidEmail'),
     errorGeneric: t('errorGeneric'),
+    noAccount: t('noAccount'),
+    registerLink: t('registerLink'),
   };
 
   return (

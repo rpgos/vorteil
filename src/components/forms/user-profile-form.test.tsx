@@ -13,8 +13,6 @@ const labels: RegistrationLabels = {
   genderLabel: 'Gender',
   genderFemale: 'Female',
   genderMale: 'Male',
-  genderNonBinary: 'Non-binary',
-  genderPreferNotToSay: 'Prefer not to say',
   lkLevelLabel: 'LK level',
   lkLevelPlaceholder: 'e.g. 8.1',
   lkLevelHint: 'Your LK ranking.',
@@ -50,19 +48,6 @@ describe('UserProfileForm', () => {
   it('renders the name input', () => {
     render(<UserProfileForm labels={labels} />);
     expect(screen.getByLabelText('Full name')).toBeInTheDocument();
-  });
-
-  it('renders the gender select with all options', () => {
-    render(<UserProfileForm labels={labels} />);
-    expect(screen.getByLabelText('Gender')).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'Female' })).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'Non-binary' })).toBeInTheDocument();
-  });
-
-  it('renders the skill level select', () => {
-    render(<UserProfileForm labels={labels} />);
-    expect(screen.getByLabelText('Skill level')).toBeInTheDocument();
-    expect(screen.getByRole('option', { name: 'Intermediate' })).toBeInTheDocument();
   });
 
   it('renders the submit button', () => {

@@ -17,6 +17,8 @@ const labels: LoginFormLabels = {
   orDivider: 'or',
   errorInvalidEmail: 'Invalid email',
   errorGeneric: 'Something went wrong',
+  noAccount: "Don't have an account?",
+  registerLink: 'Register',
 };
 
 describe('LoginForm', () => {
@@ -35,5 +37,10 @@ describe('LoginForm', () => {
   it('renders the or divider', () => {
     render(<LoginForm labels={labels} />);
     expect(screen.getByText('or')).toBeInTheDocument();
+  });
+
+  it('renders the register link', () => {
+    render(<LoginForm labels={labels} />);
+    expect(screen.getByRole('link', { name: 'Register' })).toHaveAttribute('href', '/register');
   });
 });

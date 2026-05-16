@@ -41,8 +41,8 @@ describe('createUserSchema', () => {
     expect(result.success).toBe(false);
   });
 
-  it('rejects lkLevel above 23', () => {
-    const result = createUserSchema.safeParse({ ...valid, lkLevel: 24 });
+  it('rejects lkLevel above 25', () => {
+    const result = createUserSchema.safeParse({ ...valid, lkLevel: 26 });
     expect(result.success).toBe(false);
   });
 

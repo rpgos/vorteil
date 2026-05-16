@@ -7,8 +7,6 @@
   "genderLabel": "Geschlecht",
   "genderFemale": "Weiblich",
   "genderMale": "Männlich",
-  "genderNonBinary": "Nicht-binär",
-  "genderPreferNotToSay": "Keine Angabe",
   "lkLevelLabel": "LK",
   "lkLevelPlaceholder": "z. B. 8.1",
   "lkLevelHint": "Deine LK-Einstufung (1.0–25.0). Freilassen, falls nicht vorhanden.",

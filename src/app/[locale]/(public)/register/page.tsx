@@ -32,8 +32,6 @@ export default async function RegisterPage({ params }: Props) {
     genderLabel: t('genderLabel'),
     genderFemale: t('genderFemale'),
     genderMale: t('genderMale'),
-    genderNonBinary: t('genderNonBinary'),
-    genderPreferNotToSay: t('genderPreferNotToSay'),
     lkLevelLabel: t('lkLevelLabel'),
     lkLevelPlaceholder: t('lkLevelPlaceholder'),
     lkLevelHint: t('lkLevelHint'),

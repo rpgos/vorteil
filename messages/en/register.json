@@ -7,8 +7,6 @@
   "genderLabel": "Gender",
   "genderFemale": "Female",
   "genderMale": "Male",
-  "genderNonBinary": "Non-binary",
-  "genderPreferNotToSay": "Prefer not to say",
   "lkLevelLabel": "LK level",
   "lkLevelPlaceholder": "e.g. 8.1",
   "lkLevelHint": "Your German LK ranking (1.0–25.0). Leave blank if you don't have one.",

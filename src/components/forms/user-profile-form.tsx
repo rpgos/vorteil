@@ -13,8 +13,6 @@ export type RegistrationLabels = {
   genderLabel: string;
   genderFemale: string;
   genderMale: string;
-  genderNonBinary: string;
-  genderPreferNotToSay: string;
   lkLevelLabel: string;
   lkLevelPlaceholder: string;
   lkLevelHint: string;

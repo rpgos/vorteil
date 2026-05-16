@@ -5,7 +5,7 @@ import { Button } from '@heroui/react';
 import { Mail } from 'lucide-react';
 import { requestMagicLink, signInWithOAuth } from '@/server/actions/auth';
 import type { ActionResult } from '@/types/action';
-import { Input, Label, Separator, Surface } from '@heroui/react';
+import { Input, Label, Separator, Surface, Link } from '@heroui/react';
 import { GoogleIcon } from '@/components/icons/google';
 import { AppleIcon } from '@/components/icons/apple';
 
@@ -19,6 +19,8 @@ export type LoginFormLabels = {
   orDivider: string;
   errorInvalidEmail: string;
   errorGeneric: string;
+  noAccount: string;
+  registerLink: string;
 };
 
 export default function LoginForm({ labels }: { labels: LoginFormLabels }) {
@@ -81,6 +83,14 @@ export default function LoginForm({ labels }: { labels: LoginFormLabels }) {
           </Button>
         </form>
       </div>
+
+      <p className="mt-6 text-center text-sm text-foreground-400">
+        {labels.noAccount}{' '}
+        <Link href="/register" className="text-primary underline-offset-2 hover:underline">
+          {labels.registerLink}
+          <Link.Icon />
+        </Link>
+      </p>
     </Surface>
   );
 }
