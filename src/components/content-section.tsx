@@ -25,7 +25,9 @@ export default function ContentSection({
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold md:text-4xl">{title}</h2>
           <p className="mt-4 text-lg text-default-500">{subtitle}</p>
-          {children && <div className="mt-6">{children}</div>}
+          {children && (
+            <div className="mt-6 flex flex-col md:flex-row gap-2 items-center justify-center">{children}</div>
+          )}
         </div>
       </section>
     );
