@@ -7,6 +7,7 @@ import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import { Header } from '@/components/header';
+import { Footer } from '@/components/footer';
 import '../globals.css';
 
 const geistMono = Geist_Mono({
@@ -57,6 +58,7 @@ export default async function LocaleLayout({ children, params }: Props) {
           <ThemeProvider attribute="class" defaultTheme="dark">
             <Header />
             {children}
+            <Footer />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>
