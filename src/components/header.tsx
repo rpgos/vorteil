@@ -18,7 +18,9 @@ export async function Header() {
       </NextLink>
 
       <nav className="absolute left-1/2 -translate-x-1/2 hidden md:flex items-center gap-1">
-        <NextLink href="/leagues">{t('leagues')}</NextLink>
+        <NextLink href="/leagues" className={buttonVariants({ variant: 'ghost' })}>
+          {t('leagues')}
+        </NextLink>
         {session && (
           <NextLink href="/users/profile" className={buttonVariants({ variant: 'ghost' })}>
             {t('profile')}

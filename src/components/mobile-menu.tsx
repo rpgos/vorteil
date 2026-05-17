@@ -24,7 +24,7 @@ export function MobileMenu({ session }: MobileMenuProps) {
         onPress={() => setOpen(prev => !prev)}
         aria-label={open ? 'Close menu' : 'Open menu'}
         aria-expanded={open}
-        className="md:hidden"
+        className="md:hidden absolute left-1/2 -translate-x-1/2"
       >
         {open ? <X size={20} /> : <Menu size={20} />}
       </Button>
