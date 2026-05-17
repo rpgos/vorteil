@@ -5,9 +5,10 @@ import { Button } from '@heroui/react';
 import { Mail } from 'lucide-react';
 import { requestMagicLink, signInWithOAuth } from '@/server/actions/auth';
 import type { ActionResult } from '@/types/action';
-import { Input, Label, Separator, Surface, Link } from '@heroui/react';
+import { Input, Label, Separator, Surface, Link, linkVariants } from '@heroui/react';
 import { GoogleIcon } from '@/components/icons/google';
 import { AppleIcon } from '@/components/icons/apple';
+import NextLink from 'next/link';
 
 export type LoginFormLabels = {
   emailLabel: string;
@@ -25,6 +26,7 @@ export type LoginFormLabels = {
 
 export default function LoginForm({ labels }: { labels: LoginFormLabels }) {
   const [state, formAction, pending] = useActionState<ActionResult<null> | null, FormData>(requestMagicLink, null);
+  const linkStyles = linkVariants();
 
   if (state?.ok) {
     return (
@@ -86,10 +88,10 @@ export default function LoginForm({ labels }: { labels: LoginFormLabels }) {
 
       <p className="mt-6 text-center text-sm text-foreground-400">
         {labels.noAccount}{' '}
-        <Link href="/register" className="text-primary underline-offset-2 hover:underline">
+        <NextLink href="register" className={linkStyles.base()}>
           {labels.registerLink}
-          <Link.Icon />
-        </Link>
+          <Link.Icon className={linkStyles.icon()} />
+        </NextLink>
       </p>
     </Surface>
   );
