@@ -37,7 +37,7 @@ export default async function HomePage({ params }: Props) {
   setRequestLocale(locale);
 
   const t = await getTranslations('Home');
-  const heroImage = heroImagePaths[Math.floor(Math.random() * heroImagePaths.length)];
+  const heroImage = heroImagePaths[new Date().getTime() % heroImagePaths.length];
 
   return (
     <main>
