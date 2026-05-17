@@ -29,7 +29,7 @@ export async function Header() {
         </NextLink>
       </nav>
 
-      {session && <MobileMenu session={session} />}
+      <MobileMenu session={session} />
 
       <div className="flex items-center gap-2 shrink-0">
         <div className="hidden md:flex">

@@ -41,6 +41,6 @@ describe('LoginForm', () => {
 
   it('renders the register link', () => {
     render(<LoginForm labels={labels} />);
-    expect(screen.getByRole('link', { name: 'Register' })).toHaveAttribute('href', '/register');
+    expect(screen.getByRole('link', { name: 'Register' })).toHaveAttribute('href', 'register');
   });
 });
