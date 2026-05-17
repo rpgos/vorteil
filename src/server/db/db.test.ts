@@ -1,4 +1,4 @@
-import { describe, it, expect, beforeEach } from 'vitest';
+import { describe, it, expect } from 'vitest';
 
 // Import fresh module state by using vi.resetModules between tests if needed.
 // For simplicity we test observable behaviour: reads after writes are consistent.

@@ -1,7 +1,7 @@
 'use client';
 
 import { useActionState } from 'react';
-import { Button, Input, Label, Surface, Separator, Select, Description, ListBox } from '@heroui/react';
+import { Button, Input, Label, Surface, Separator, Select, Description, ListBox, Spinner } from '@heroui/react';
 import { Mail } from 'lucide-react';
 import { completeRegistration } from '@/server/actions/users';
 import type { ActionResult } from '@/types/action';
@@ -37,9 +37,6 @@ export type RegistrationLabels = {
   successMessage: string;
 };
 
-const selectClass =
-  'w-full rounded-xl border border-divider bg-content2 px-4 py-2.5 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-primary';
-
 function FieldError({ message }: { message?: string }) {
   if (!message) return null;
   return <p className="text-xs text-danger">{message}</p>;
@@ -66,7 +63,14 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
           <Label isRequired htmlFor="email">
             {labels.emailLabel}
           </Label>
-          <Input id="email" name="email" type="email" placeholder="you@example.com" autoComplete="email" />
+          <Input
+            id="email"
+            aria-label={labels.emailLabel}
+            name="email"
+            type="email"
+            placeholder="you@example.com"
+            autoComplete="email"
+          />
           <FieldError message={err('email')} />
         </div>
 
@@ -74,7 +78,14 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
           <Label isRequired htmlFor="name">
             {labels.nameLabel}
           </Label>
-          <Input id="name" name="name" type="text" placeholder={labels.namePlaceholder} autoComplete="name" />
+          <Input
+            id="name"
+            aria-label={labels.nameLabel}
+            name="name"
+            type="text"
+            placeholder={labels.namePlaceholder}
+            autoComplete="name"
+          />
           <FieldError message={err('name')} />
         </div>
 
@@ -82,7 +93,7 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
           <Label isRequired htmlFor="gender">
             {labels.genderLabel}
           </Label>
-          <Select id="gender" name="gender">
+          <Select id="gender" name="gender" aria-label={labels.genderLabel}>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -110,6 +121,7 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
           <Input
             id="lkLevel"
             name="lkLevel"
+            aria-label={labels.lkLevelLabel}
             type="number"
             placeholder={labels.lkLevelPlaceholder}
             min={1}
@@ -122,7 +134,7 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
 
         <div className="flex flex-col gap-1">
           <Label htmlFor="level">{labels.levelLabel}</Label>
-          <Select id="level" name="level">
+          <Select id="level" name="level" aria-label={labels.levelLabel}>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -158,13 +170,20 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
           <Label isRequired htmlFor="city">
             {labels.cityLabel}
           </Label>
-          <Input id="city" name="city" type="text" placeholder={labels.cityPlaceholder} autoComplete="address-level2" />
+          <Input
+            id="city"
+            aria-label={labels.cityLabel}
+            name="city"
+            type="text"
+            placeholder={labels.cityPlaceholder}
+            autoComplete="address-level2"
+          />
           <FieldError message={err('city')} />
         </div>
 
         <div className="flex flex-col gap-1">
           <Label htmlFor="dominantHand">{labels.dominantHandLabel}</Label>
-          <Select id="dominantHand" name="dominantHand">
+          <Select id="dominantHand" name="dominantHand" aria-label={labels.dominantHandLabel}>
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -186,11 +205,17 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
 
         <div className="flex flex-col gap-1">
           <Label htmlFor="homeClub">{labels.homeClubLabel}</Label>
-          <Input id="homeClub" name="homeClub" type="text" placeholder={labels.homeClubPlaceholder} />
+          <Input
+            id="homeClub"
+            aria-label={labels.homeClubLabel}
+            name="homeClub"
+            type="text"
+            placeholder={labels.homeClubPlaceholder}
+          />
         </div>
 
-        <Button type="submit" variant="primary" fullWidth isDisabled={pending}>
-          {pending ? '…' : labels.submitLabel}
+        <Button type="submit" variant="primary" isPending={pending} fullWidth isDisabled={pending}>
+          {pending ? <Spinner color="current" size="sm" /> : labels.submitLabel}
         </Button>
       </form>
     </Surface>
