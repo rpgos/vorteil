@@ -1,5 +1,7 @@
 {
   "login": "Entrar",
   "logout": "Sair",
-  "about": "Sobre"
+  "leagues": "Ligas",
+  "profile": "Perfil",
+  "howItWorks": "Como Funciona"
 }

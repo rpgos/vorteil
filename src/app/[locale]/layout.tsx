@@ -2,7 +2,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
-import { hasLocale } from 'next-intl';
+import { hasLocale, NextIntlClientProvider } from 'next-intl';
 import { setRequestLocale } from 'next-intl/server';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
@@ -53,10 +53,12 @@ export default async function LocaleLayout({ children, params }: Props) {
       className={`${bricolage.variable} ${geistMono.variable} ${groovello.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <ThemeProvider attribute="class" defaultTheme="dark">
-          <Header />
-          {children}
-        </ThemeProvider>
+        <NextIntlClientProvider locale={locale}>
+          <ThemeProvider attribute="class" defaultTheme="dark">
+            <Header />
+            {children}
+          </ThemeProvider>
+        </NextIntlClientProvider>
       </body>
     </html>
   );

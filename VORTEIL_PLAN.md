@@ -281,7 +281,7 @@ Route `/register` for collecting profile info after the first sign-in.
 
 8. Unit tests for the Zod schema covering: each invalid case (missing required, invalid email, lkLevel out of range, neither lkLevel nor level provided), and a fully valid case.
 
-# 10. Roles and route guards
+# 10. Roles and route guards [DONE]
 
 1. Define `Role` in `src/types/auth.ts`: `type Role = 'player' | 'admin'`. Users carry a `roles: Role[]` so they can hold multiple roles in the future without migration pain.
 
