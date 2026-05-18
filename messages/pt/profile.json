@@ -5,5 +5,6 @@
   "deleteTitle": "Eliminar conta",
   "deleteDescription": "Isto irá eliminar permanentemente a tua conta e todos os dados associados. Esta acção não pode ser revertida.",
   "deleteButton": "Eliminar a minha conta",
-  "deleteSuccessMessage": "Recebemos o teu pedido. A tua conta será eliminada nos próximos 30 dias."
+  "toastMessage": "Tens a certeza de que queres eliminar a tua conta? Esta acção não pode ser revertida e todos os teus dados serão permanentemente removidos.",
+  "deleteSuccessMessage": "Conta eliminada com sucesso."
 }

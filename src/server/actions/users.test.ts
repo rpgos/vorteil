@@ -8,7 +8,7 @@ vi.mock('@/server/auth/guards', () => ({
 }));
 
 import { redirect } from 'next/navigation';
-import { completeRegistration, updateProfile, requestAccountDeletion } from './users';
+import { completeRegistration, updateProfile, deleteAccount } from './users';
 
 function makeFormData(values: Record<string, string>) {
   const fd = new FormData();
@@ -115,11 +115,11 @@ describe('updateProfile', () => {
   });
 });
 
-describe('requestAccountDeletion', () => {
+describe('deleteAccount', () => {
   beforeEach(() => vi.clearAllMocks());
 
-  it('returns ok', async () => {
-    const result = await requestAccountDeletion();
-    expect(result?.ok).toBe(true);
+  it('deletes the account and redirects', async () => {
+    await deleteAccount();
+    expect(redirect).toHaveBeenCalledWith('/');
   });
 });

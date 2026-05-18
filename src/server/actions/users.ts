@@ -74,8 +74,8 @@ export async function updateProfile(
   return { ok: true, data: null };
 }
 
-export async function requestAccountDeletion(): Promise<ActionResult<null>> {
+export async function deleteAccount(): Promise<ActionResult<null>> {
   const session = await requireSession();
-  console.log(`[DB STUB] Would request account deletion for ${session.userId}`);
-  return { ok: true, data: null };
+  usersDb.remove(session.userId);
+  redirect('/');
 }

@@ -5,5 +5,6 @@
   "deleteTitle": "Delete account",
   "deleteDescription": "This will permanently delete your account and all associated data. This action cannot be undone.",
   "deleteButton": "Delete my account",
-  "deleteSuccessMessage": "We've received your request. Your account will be deleted within 30 days."
+  "toastMessage": "Are you sure you want to delete your account? This action cannot be undone and all your data will be permanently removed.",
+  "deleteSuccessMessage": "Account successfully deleted."
 }

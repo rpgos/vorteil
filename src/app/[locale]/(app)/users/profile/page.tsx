@@ -23,8 +23,7 @@ export default async function ProfilePage({ params }: Props) {
   setRequestLocale(locale);
 
   const session = await requireSession();
-  const user = usersDb.getById('u1');
-  // const user = usersDb.getById(session.userId);
+  const user = usersDb.getById(session.userId);
 
   const tReg = await getTranslations({ locale, namespace: 'Register' });
   const tPro = await getTranslations({ locale, namespace: 'Profile' });
@@ -77,6 +76,7 @@ export default async function ProfilePage({ params }: Props) {
     title: tPro('deleteTitle'),
     description: tPro('deleteDescription'),
     button: tPro('deleteButton'),
+    toastMessage: tPro('toastMessage'),
     successMessage: tPro('deleteSuccessMessage'),
   };
 

@@ -5,5 +5,6 @@
   "deleteTitle": "Konto löschen",
   "deleteDescription": "Dadurch wird dein Konto und alle zugehörigen Daten dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
   "deleteButton": "Mein Konto löschen",
-  "deleteSuccessMessage": "Wir haben deine Anfrage erhalten. Dein Konto wird innerhalb von 30 Tagen gelöscht."
+  "toastMessage": "Bist du sicher, dass du dein Konto löschen möchtest? Diese Aktion kann nicht rückgängig gemacht werden und alle deine Daten werden dauerhaft entfernt.",
+  "deleteSuccessMessage": "Konto erfolgreich gelöscht."
 }
