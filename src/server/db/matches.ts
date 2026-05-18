@@ -36,6 +36,12 @@ export function getByLeague(leagueId: string): Match[] {
   return Array.from(store.values()).filter(m => m.leagueId === leagueId);
 }
 
+export function getByPlayer(userId: string): Match[] {
+  return Array.from(store.values()).filter(
+    m => (m.playerAId === userId || m.playerBId === userId) && m.status === 'played'
+  );
+}
+
 export function getById(id: string): Match | null {
   return store.get(id) ?? null;
 }

@@ -294,7 +294,7 @@ Route `/register` for collecting profile info after the first sign-in.
 
 4. Unit tests for the guards using a mocked session.
 
-# 11. User edit profile
+# 11. User edit profile [DONE]
 
 Route `/users/profile`.
 
