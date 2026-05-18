@@ -1,0 +1,9 @@
+{
+  "pageTitle": "Profil bearbeiten · Vorteil",
+  "pageDescription": "Aktualisiere dein Spielerprofil.",
+  "successMessage": "Profil erfolgreich aktualisiert.",
+  "deleteTitle": "Konto löschen",
+  "deleteDescription": "Dadurch wird dein Konto und alle zugehörigen Daten dauerhaft gelöscht. Diese Aktion kann nicht rückgängig gemacht werden.",
+  "deleteButton": "Mein Konto löschen",
+  "deleteSuccessMessage": "Wir haben deine Anfrage erhalten. Dein Konto wird innerhalb von 30 Tagen gelöscht."
+}

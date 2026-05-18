@@ -1,0 +1,9 @@
+{
+  "pageTitle": "Editar perfil · Vorteil",
+  "pageDescription": "Actualiza o teu perfil de jogador.",
+  "successMessage": "Perfil actualizado com sucesso.",
+  "deleteTitle": "Eliminar conta",
+  "deleteDescription": "Isto irá eliminar permanentemente a tua conta e todos os dados associados. Esta acção não pode ser revertida.",
+  "deleteButton": "Eliminar a minha conta",
+  "deleteSuccessMessage": "Recebemos o teu pedido. A tua conta será eliminada nos próximos 30 dias."
+}

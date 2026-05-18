@@ -1,10 +1,22 @@
 'use client';
 
-import { useActionState } from 'react';
-import { Button, Input, Label, Surface, Separator, Select, Description, ListBox, Spinner } from '@heroui/react';
+import { useActionState, useEffect } from 'react';
+import { Button, toast, Input, Label, Surface, Separator, Select, Description, ListBox, Spinner } from '@heroui/react';
 import { Mail } from 'lucide-react';
-import { completeRegistration } from '@/server/actions/users';
 import type { ActionResult } from '@/types/action';
+
+type FormAction = (prevState: ActionResult<null> | null, formData: FormData) => Promise<ActionResult<null>>;
+
+export type DefaultValues = {
+  email?: string;
+  name?: string;
+  gender?: string;
+  lkLevel?: number | null;
+  level?: string | null;
+  city?: string;
+  dominantHand?: string | null;
+  homeClub?: string | null;
+};
 
 export type RegistrationLabels = {
   emailLabel: string;
@@ -42,10 +54,24 @@ function FieldError({ message }: { message?: string }) {
   return <p className="text-xs text-danger">{message}</p>;
 }
 
-export default function UserProfileForm({ labels }: { labels: RegistrationLabels }) {
-  const [state, formAction, pending] = useActionState<ActionResult<null> | null, FormData>(completeRegistration, null);
+interface UserProfileFormProps {
+  labels: RegistrationLabels;
+  action: FormAction;
+  mode?: 'register' | 'edit';
+  defaultValues?: DefaultValues;
+}
 
-  if (state?.ok) {
+export default function UserProfileForm({ labels, action, mode = 'register', defaultValues }: UserProfileFormProps) {
+  const [state, formAction, pending] = useActionState<ActionResult<null> | null, FormData>(action, null);
+
+  useEffect(() => {
+    if (state?.ok && mode === 'edit') {
+      toast.success(labels.successMessage);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [state]);
+
+  if (state?.ok && mode === 'register') {
     return (
       <div className="w-full max-w-xl rounded-2xl border border-divider bg-content1 p-8 text-center">
         <Mail className="mx-auto mb-4 text-primary" size={32} />
@@ -70,6 +96,9 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
             type="email"
             placeholder="you@example.com"
             autoComplete="email"
+            defaultValue={defaultValues?.email ?? ''}
+            readOnly={mode === 'edit'}
+            className={mode === 'edit' ? 'opacity-60' : undefined}
           />
           <FieldError message={err('email')} />
         </div>
@@ -85,6 +114,7 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
             type="text"
             placeholder={labels.namePlaceholder}
             autoComplete="name"
+            defaultValue={defaultValues?.name ?? ''}
           />
           <FieldError message={err('name')} />
         </div>
@@ -93,7 +123,12 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
           <Label isRequired htmlFor="gender">
             {labels.genderLabel}
           </Label>
-          <Select id="gender" name="gender" aria-label={labels.genderLabel}>
+          <Select
+            id="gender"
+            name="gender"
+            aria-label={labels.genderLabel}
+            defaultSelectedKey={defaultValues?.gender ?? undefined}
+          >
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -127,6 +162,7 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
             min={1}
             max={23}
             step={0.1}
+            defaultValue={defaultValues?.lkLevel != null ? String(defaultValues.lkLevel) : ''}
           />
           <p className="text-xs text-foreground-400">{labels.lkLevelHint}</p>
           <FieldError message={err('lkLevel')} />
@@ -134,7 +170,12 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
 
         <div className="flex flex-col gap-1">
           <Label htmlFor="level">{labels.levelLabel}</Label>
-          <Select id="level" name="level" aria-label={labels.levelLabel}>
+          <Select
+            id="level"
+            name="level"
+            aria-label={labels.levelLabel}
+            defaultSelectedKey={defaultValues?.level ?? undefined}
+          >
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -177,13 +218,19 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
             type="text"
             placeholder={labels.cityPlaceholder}
             autoComplete="address-level2"
+            defaultValue={defaultValues?.city ?? ''}
           />
           <FieldError message={err('city')} />
         </div>
 
         <div className="flex flex-col gap-1">
           <Label htmlFor="dominantHand">{labels.dominantHandLabel}</Label>
-          <Select id="dominantHand" name="dominantHand" aria-label={labels.dominantHandLabel}>
+          <Select
+            id="dominantHand"
+            name="dominantHand"
+            aria-label={labels.dominantHandLabel}
+            defaultSelectedKey={defaultValues?.dominantHand ?? undefined}
+          >
             <Select.Trigger>
               <Select.Value />
               <Select.Indicator />
@@ -211,6 +258,7 @@ export default function UserProfileForm({ labels }: { labels: RegistrationLabels
             name="homeClub"
             type="text"
             placeholder={labels.homeClubPlaceholder}
+            defaultValue={defaultValues?.homeClub ?? ''}
           />
         </div>
 

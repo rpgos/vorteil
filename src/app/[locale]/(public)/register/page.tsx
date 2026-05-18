@@ -2,6 +2,7 @@ import { redirect } from 'next/navigation';
 import type { Metadata } from 'next';
 import { setRequestLocale, getTranslations } from 'next-intl/server';
 import { getOptionalSession } from '@/server/auth/session';
+import { completeRegistration } from '@/server/actions/users';
 import UserProfileForm, { type RegistrationLabels } from '@/components/forms/user-profile-form';
 
 type Props = { params: Promise<{ locale: string }> };
@@ -60,7 +61,7 @@ export default async function RegisterPage({ params }: Props) {
     <main className="flex flex-col min-h-[calc(100vh-4rem)] items-center justify-center p-4 gap-4">
       <h1 className="text-3xl font-bold">{t('pageTitle')}</h1>
       <div className="flex w-full max-w-xl flex-col gap-4">
-        <UserProfileForm labels={labels} />
+        <UserProfileForm labels={labels} action={completeRegistration} mode="register" />
         <p className="text-center text-xs text-foreground-400">{t('privacyNote')}</p>
       </div>
     </main>

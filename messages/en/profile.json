@@ -1,0 +1,9 @@
+{
+  "pageTitle": "Edit profile · Vorteil",
+  "pageDescription": "Update your player profile.",
+  "successMessage": "Profile updated successfully.",
+  "deleteTitle": "Delete account",
+  "deleteDescription": "This will permanently delete your account and all associated data. This action cannot be undone.",
+  "deleteButton": "Delete my account",
+  "deleteSuccessMessage": "We've received your request. Your account will be deleted within 30 days."
+}

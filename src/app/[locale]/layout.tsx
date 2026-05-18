@@ -9,6 +9,7 @@ import { routing } from '@/i18n/routing';
 import { Header } from '@/components/header';
 import { Footer } from '@/components/footer';
 import '../globals.css';
+import { Toast } from '@heroui/react';
 
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
@@ -56,6 +57,7 @@ export default async function LocaleLayout({ children, params }: Props) {
       <body className="min-h-full flex flex-col">
         <NextIntlClientProvider locale={locale}>
           <ThemeProvider attribute="class" defaultTheme="dark">
+            <Toast.Provider />
             <Header />
             {children}
             <Footer />
