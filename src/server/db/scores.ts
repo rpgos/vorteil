@@ -18,6 +18,21 @@ const seed: MatchScore[] = [
     disputedAt: null,
     disputeReason: null,
   },
+  {
+    id: 'score2',
+    matchId: 'match4',
+    set1A: 6,
+    set1B: 3,
+    set2A: 4,
+    set2B: 6,
+    superTiebreakA: 10,
+    superTiebreakB: 3,
+    winnerId: 'u2',
+    submittedAt,
+    disputeWindowEndsAt: new Date(submittedAt.getTime() + 48 * 60 * 60 * 1000),
+    disputedAt: null,
+    disputeReason: null,
+  },
 ];
 
 const store = new Map<string, MatchScore>(seed.map(s => [s.id, s]));

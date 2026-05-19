@@ -8,6 +8,8 @@ import * as matchesDb from '@/server/db/matches';
 import * as scoresDb from '@/server/db/scores';
 import * as leaguesDb from '@/server/db/leagues';
 import * as membershipsDb from '@/server/db/memberships';
+import { Surface } from '@heroui/react';
+import { Calendar1, Gauge, Hand, MapPin } from 'lucide-react';
 
 type Props = { params: Promise<{ locale: string; userId: string }> };
 
@@ -91,7 +93,7 @@ export default async function UserPublicProfilePage({ params }: Props) {
       let scoreStr = '';
       if (score) {
         scoreStr = `${score.set1A}–${score.set1B}, ${score.set2A}–${score.set2B}`;
-        if (score.superTiebreakA != null) scoreStr += `, [${score.superTiebreakA}–${score.superTiebreakB}]`;
+        if (score.superTiebreakA != null) scoreStr += `, ${score.superTiebreakA}–${score.superTiebreakB}`;
       }
       return { match: m, score, opponent, league, won, scoreStr };
     });
@@ -129,41 +131,30 @@ export default async function UserPublicProfilePage({ params }: Props) {
         : t('notAvailable');
 
   return (
-    <main className="mx-auto flex w-full max-w-2xl flex-col gap-8 px-4 py-10">
-      {/* Header card */}
-      <div className="flex items-center gap-5 rounded-3xl border border-divider bg-content1 p-6">
-        <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-primary text-xl font-bold text-primary-foreground">
-          {initials(user.name)}
-        </div>
-        <div className="flex flex-col gap-1">
-          <h1 className="text-2xl font-bold">{user.name}</h1>
-          <div className="flex flex-wrap gap-3 text-sm text-foreground/60">
-            <span>{user.city}</span>
-            {user.lkLevel != null ? (
-              <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-medium text-primary">
-                {t('lkLevelLabel')} {user.lkLevel}
-              </span>
-            ) : (
-              <span className="rounded-full bg-secondary/10 px-2 py-0.5 text-xs font-medium text-secondary">
-                {levelLabels[user.level]}
-              </span>
-            )}
-            {user.dominantHand && (
-              <span>
-                {t('dominantHandLabel')}: {dominantHandLabel}
-              </span>
-            )}
-            {user.homeClub && (
-              <span>
-                {t('homeClubLabel')}: {user.homeClub}
-              </span>
-            )}
+    <main className="flex flex-col min-h-[calc(100vh-4rem)] items-center justify-center p-4 gap-8">
+      <h1 className="text-3xl font-bold">{user.name}</h1>
+      <section className="w-full max-w-2xl">
+        <div className="flex flex-row w-full gap-4 justify-evenly items-center text-center">
+          <div className="flex flex-col items-center justify-center p-4 gap-3">
+            <Hand />
+            {dominantHandLabel}
+          </div>
+          <div className="flex flex-col items-center justify-center p-4 gap-3">
+            <Gauge />
+            {user.lkLevel || levelLabels[user.level] || t('notAvailable')}
+          </div>
+          <div className="flex flex-col items-center justify-center p-4 gap-3">
+            <Calendar1 />
+            {user.createdAt.toLocaleDateString(locale, { year: 'numeric', month: 'long' })}
+          </div>
+          <div className="flex flex-col items-center justify-center p-4 gap-3">
+            <MapPin />
+            {user.city}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Stats */}
-      <section>
+      <section className="w-full max-w-2xl">
         <h2 className="mb-3 text-lg font-semibold">{t('statsTitle')}</h2>
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
           {[
@@ -172,18 +163,15 @@ export default async function UserPublicProfilePage({ params }: Props) {
             { label: t('losses'), value: losses },
             { label: t('winRate'), value: `${winRate}%` },
           ].map(({ label, value }) => (
-            <div key={label} className="flex flex-col items-center rounded-2xl border border-divider bg-content1 p-4">
+            <Surface
+              key={label}
+              className="flex flex-col items-center justify-center rounded-3xl border border-accent p-4"
+            >
               <span className="text-2xl font-bold">{value}</span>
               <span className="mt-1 text-xs text-foreground/60">{label}</span>
-            </div>
+            </Surface>
           ))}
         </div>
-        {rankLabel && (
-          <p className="mt-3 text-sm text-foreground/60">
-            {t('currentRank')}: <span className="font-medium text-foreground">{rankLabel}</span>
-          </p>
-        )}
-        {!rankLabel && <p className="mt-3 text-sm text-foreground/60">{t('noActiveLeague')}</p>}
       </section>
 
       {/* Head-to-head */}
@@ -199,18 +187,19 @@ export default async function UserPublicProfilePage({ params }: Props) {
       )}
 
       {/* Recent matches */}
-      <section>
+      <section className="w-full max-w-2xl">
         <h2 className="mb-3 text-lg font-semibold">{t('recentMatchesTitle')}</h2>
         {recentMatches.length === 0 ? (
           <p className="text-sm text-foreground/60">{t('noRecentMatches')}</p>
         ) : (
-          <ul className="flex flex-col gap-2">
+          <ul className="flex flex-col gap-3">
             {recentMatches.map(({ match, opponent, league, won, scoreStr }) => (
-              <li
+              <Surface
                 key={match.id}
-                className="flex items-center justify-between rounded-2xl border border-divider bg-content1 px-4 py-3 text-sm"
+                variant="secondary"
+                className={`flex items-center rounded-3xl p-4 border ${won ? 'border-success' : 'border-danger/70'}`}
               >
-                <div className="flex flex-col gap-0.5">
+                <div className="flex flex-col gap-0.5 flex-1">
                   <span>
                     {t('vs')}{' '}
                     {opponent ? (
@@ -233,7 +222,7 @@ export default async function UserPublicProfilePage({ params }: Props) {
                     {won ? t('won') : t('lost')}
                   </span>
                 </div>
-              </li>
+              </Surface>
             ))}
           </ul>
         )}
