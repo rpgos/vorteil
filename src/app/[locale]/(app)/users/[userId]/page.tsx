@@ -25,15 +25,6 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   };
 }
 
-function initials(name: string): string {
-  return name
-    .split(' ')
-    .map(n => n[0])
-    .join('')
-    .toUpperCase()
-    .slice(0, 2);
-}
-
 export default async function UserPublicProfilePage({ params }: Props) {
   const { locale, userId } = await params;
   setRequestLocale(locale);
@@ -174,59 +165,62 @@ export default async function UserPublicProfilePage({ params }: Props) {
         </div>
       </section>
 
-      {/* Head-to-head */}
-      {!isOwnProfile && (
-        <section>
-          <h2 className="mb-3 text-lg font-semibold">{t('headToHeadTitle')}</h2>
-          {hasH2H ? (
-            <p className="text-2xl font-bold">{t('headToHeadRecord', { wins: h2hWins, losses: h2hLosses })}</p>
+      <div className={`grid w-full max-w-2xl gap-4 ${isOwnProfile ? 'grid-cols-1' : 'md:grid-cols-3'}`}>
+        {/* Recent matches */}
+        <section className={isOwnProfile ? 'col-span-1' : 'md:col-span-2 md:order-1 order-2'}>
+          <h2 className="mb-3 text-lg font-semibold">{t('recentMatchesTitle')}</h2>
+          {recentMatches.length === 0 ? (
+            <p className="text-sm text-foreground/60">{t('noRecentMatches')}</p>
           ) : (
-            <p className="text-sm text-foreground/60">{t('noHeadToHead')}</p>
+            <ul className="flex flex-col gap-3">
+              {recentMatches.map(({ match, opponent, league, won, scoreStr }) => (
+                <Surface
+                  key={match.id}
+                  variant="secondary"
+                  className={`flex items-center rounded-3xl p-4 border ${won ? 'border-success' : 'border-danger/70'}`}
+                >
+                  <div className="flex flex-col gap-0.5 flex-1">
+                    <span>
+                      {t('vs')}{' '}
+                      {opponent ? (
+                        <Link href={`/users/${opponent.id}`} className="font-medium hover:underline">
+                          {opponent.name}
+                        </Link>
+                      ) : (
+                        t('notAvailable')
+                      )}
+                    </span>
+                    {league && <span className="text-xs text-foreground/50">{league.name}</span>}
+                  </div>
+                  <div className="flex items-center gap-3">
+                    <span className="font-mono text-xs">{scoreStr}</span>
+                    <span
+                      className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
+                        won ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'
+                      }`}
+                    >
+                      {won ? t('won') : t('lost')}
+                    </span>
+                  </div>
+                </Surface>
+              ))}
+            </ul>
           )}
         </section>
-      )}
 
-      {/* Recent matches */}
-      <section className="w-full max-w-2xl">
-        <h2 className="mb-3 text-lg font-semibold">{t('recentMatchesTitle')}</h2>
-        {recentMatches.length === 0 ? (
-          <p className="text-sm text-foreground/60">{t('noRecentMatches')}</p>
-        ) : (
-          <ul className="flex flex-col gap-3">
-            {recentMatches.map(({ match, opponent, league, won, scoreStr }) => (
-              <Surface
-                key={match.id}
-                variant="secondary"
-                className={`flex items-center rounded-3xl p-4 border ${won ? 'border-success' : 'border-danger/70'}`}
-              >
-                <div className="flex flex-col gap-0.5 flex-1">
-                  <span>
-                    {t('vs')}{' '}
-                    {opponent ? (
-                      <Link href={`/users/${opponent.id}`} className="font-medium hover:underline">
-                        {opponent.name}
-                      </Link>
-                    ) : (
-                      t('notAvailable')
-                    )}
-                  </span>
-                  {league && <span className="text-xs text-foreground/50">{league.name}</span>}
-                </div>
-                <div className="flex items-center gap-3">
-                  <span className="font-mono text-xs">{scoreStr}</span>
-                  <span
-                    className={`rounded-full px-2 py-0.5 text-xs font-semibold ${
-                      won ? 'bg-success/10 text-success' : 'bg-danger/10 text-danger'
-                    }`}
-                  >
-                    {won ? t('won') : t('lost')}
-                  </span>
-                </div>
-              </Surface>
-            ))}
-          </ul>
+        {!isOwnProfile && (
+          <section className="col-span-1 flex flex-col md:order-2 order-1">
+            <h2 className="mb-3 text-lg font-semibold">{t('headToHeadTitle')}</h2>
+            <Surface className="flex flex-1 flex-col items-center justify-center rounded-3xl border border-accent p-4 text-center">
+              {hasH2H ? (
+                <p className="text-2xl font-bold">{t('headToHeadRecord', { wins: h2hWins, losses: h2hLosses })}</p>
+              ) : (
+                <p className="text-sm text-foreground/60">{t('noHeadToHead')}</p>
+              )}
+            </Surface>
+          </section>
         )}
-      </section>
+      </div>
     </main>
   );
 }

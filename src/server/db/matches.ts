@@ -37,6 +37,24 @@ const seed: Match[] = [
     submittedById: 'u2',
     createdAt: new Date('2026-04-01T00:00:00Z'),
   },
+  {
+    id: 'match5',
+    leagueId: 'l1',
+    playerAId: 'u2',
+    playerBId: 'u1',
+    status: 'played',
+    submittedById: 'u2',
+    createdAt: new Date('2026-04-01T00:00:00Z'),
+  },
+  {
+    id: 'match6',
+    leagueId: 'l1',
+    playerAId: 'u2',
+    playerBId: 'u1',
+    status: 'played',
+    submittedById: 'u2',
+    createdAt: new Date('2026-04-01T00:00:00Z'),
+  },
 ];
 
 const store = new Map<string, Match>(seed.map(m => [m.id, m]));
