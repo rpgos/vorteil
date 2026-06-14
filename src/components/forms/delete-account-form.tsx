@@ -11,6 +11,8 @@ interface DeleteAccountFormProps {
     title: string;
     description: string;
     button: string;
+    toastMessage: string;
+    successMessage: string;
   };
 }
 
