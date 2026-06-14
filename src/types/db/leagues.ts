@@ -10,7 +10,8 @@ export type League = {
   id: string;
   name: string;
   city: string;
-  levelRange: LevelRange | null;
+  levelRange?: LevelRange | null;
+  level: string | null;
   regularSeasonRounds: number;
   hasPlayoffs: boolean;
   regularSeasonEnd: Date;

@@ -1,0 +1,23 @@
+{
+  "pageTitle": "Amateur-Tennisligen · Vorteil",
+  "pageDescription": "Finde und tritt kompetitiven Amateur-Tennisligen in deiner Nähe bei. Round-Robin-Format, Playoffs und Live-Tabellen.",
+  "heading": "Ligen",
+  "filterCity": "Stadt",
+  "filterStatus": "Status",
+  "filterAllCities": "Alle Städte",
+  "filterAllStatuses": "Alle Status",
+  "statusDraft": "Entwurf",
+  "statusOpen": "Offen",
+  "statusInSeason": "Saison läuft",
+  "statusPlayoffs": "Playoffs",
+  "statusFinished": "Abgeschlossen",
+  "levelRange": "LK {min}–{max}",
+  "levelRangeOpen": "Alle Niveaus",
+  "regularSeasonEnd": "Saison endet {date}",
+  "playoffsEnd": "Playoffs enden {date}",
+  "members": "{count} Spieler",
+  "viewButton": "Ansehen",
+  "emptyState": "Keine Ligen gefunden.",
+  "createLeague": "Liga erstellen",
+  "cityGroup": "{city}"
+}

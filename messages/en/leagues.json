@@ -1,0 +1,23 @@
+{
+  "pageTitle": "Amateur tennis leagues · Vorteil",
+  "pageDescription": "Find and join competitive amateur tennis leagues near you. Round-robin format, playoffs, and live standings.",
+  "heading": "Leagues",
+  "filterCity": "City",
+  "filterStatus": "Status",
+  "filterAllCities": "All cities",
+  "filterAllStatuses": "All statuses",
+  "statusDraft": "Draft",
+  "statusOpen": "Open",
+  "statusInSeason": "In season",
+  "statusPlayoffs": "Playoffs",
+  "statusFinished": "Finished",
+  "levelRange": "LK {min}–{max}",
+  "levelRangeOpen": "All levels",
+  "regularSeasonEnd": "Season ends {date}",
+  "playoffsEnd": "Playoffs end {date}",
+  "members": "{count} players",
+  "viewButton": "View",
+  "emptyState": "No leagues found.",
+  "createLeague": "Create a league",
+  "cityGroup": "{city}"
+}

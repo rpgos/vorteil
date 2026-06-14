@@ -1,0 +1,23 @@
+{
+  "pageTitle": "Ligas amadoras de ténis · Vorteil",
+  "pageDescription": "Encontra e junta-te a ligas amadoras de ténis perto de ti. Formato round-robin, playoffs e classificações em tempo real.",
+  "heading": "Ligas",
+  "filterCity": "Cidade",
+  "filterStatus": "Estado",
+  "filterAllCities": "Todas as cidades",
+  "filterAllStatuses": "Todos os estados",
+  "statusDraft": "Rascunho",
+  "statusOpen": "Aberta",
+  "statusInSeason": "Em época",
+  "statusPlayoffs": "Playoffs",
+  "statusFinished": "Terminada",
+  "levelRange": "LK {min}–{max}",
+  "levelRangeOpen": "Todos os níveis",
+  "regularSeasonEnd": "Época termina {date}",
+  "playoffsEnd": "Playoffs terminam {date}",
+  "members": "{count} jogadores",
+  "viewButton": "Ver",
+  "emptyState": "Nenhuma liga encontrada.",
+  "createLeague": "Criar uma liga",
+  "cityGroup": "{city}"
+}

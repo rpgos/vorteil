@@ -6,7 +6,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
   const requested = await requestLocale;
   const locale = hasLocale(routing.locales, requested) ? requested : routing.defaultLocale;
 
-  const [home, header, notFound, auth, register, footer, profile, userProfile, privacy] = await Promise.all([
+  const [home, header, notFound, auth, register, footer, profile, userProfile, privacy, leagues] = await Promise.all([
     import(`../../messages/${locale}/home.json`),
     import(`../../messages/${locale}/header.json`),
     import(`../../messages/${locale}/not-found.json`),
@@ -16,6 +16,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
     import(`../../messages/${locale}/profile.json`),
     import(`../../messages/${locale}/userProfile.json`),
     import(`../../messages/${locale}/privacy.json`),
+    import(`../../messages/${locale}/leagues.json`),
   ]);
 
   return {
@@ -30,6 +31,7 @@ export default getRequestConfig(async ({ requestLocale }) => {
       Profile: profile.default,
       UserProfile: userProfile.default,
       Privacy: privacy.default,
+      Leagues: leagues.default,
     },
   };
 });

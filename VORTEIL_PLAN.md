@@ -354,7 +354,7 @@ Reusable SEO primitives. Apply per-page in later sections.
 
 7. Add a Lighthouse / accessibility CI step to GitHub Actions (against a built preview) so SEO and a11y regressions surface in PRs.
 
-# 14. Security scaffolding
+# 14. Security scaffolding [DONE]
 
 1. Configure security headers in `next.config.ts`:
    - `Content-Security-Policy` — strict; nonce-based for any inline scripts.
