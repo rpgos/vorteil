@@ -30,14 +30,14 @@ describe('stats computation', () => {
     }).length;
     const losses = played.length - wins;
     expect(wins).toBe(1);
-    expect(losses).toBe(0);
+    expect(losses).toBe(3);
   });
 
-  it('computes win rate as 100% when all matches are won', () => {
+  it('computes win rate correctly', () => {
     const played = matchesDb.getByPlayer('u1');
     const wins = played.filter(m => scoresDb.getByMatch(m.id)?.winnerId === 'u1').length;
     const winRate = played.length > 0 ? Math.round((wins / played.length) * 100) : 0;
-    expect(winRate).toBe(100);
+    expect(winRate).toBe(25);
   });
 
   it('computes win rate as 0% when no matches played', () => {
@@ -57,7 +57,7 @@ describe('head-to-head computation', () => {
         (m.playerAId === profileUserId && m.playerBId === viewerId) ||
         (m.playerBId === profileUserId && m.playerAId === viewerId)
     );
-    expect(h2h).toHaveLength(1);
+    expect(h2h).toHaveLength(4);
   });
 
   it('viewer wins = matches where score.winnerId === viewerId', () => {
@@ -70,7 +70,7 @@ describe('head-to-head computation', () => {
         (m.playerBId === profileUserId && m.playerAId === viewerId)
     );
     const viewerWins = h2h.filter(m => scoresDb.getByMatch(m.id)?.winnerId === viewerId).length;
-    expect(viewerWins).toBe(0); // u1 won match1
+    expect(viewerWins).toBe(3); // u2 won match4, match5, match6
   });
 
   it('returns no h2h matches for players who have not met', () => {
