@@ -5,7 +5,7 @@ const withNextIntl = createNextIntlPlugin();
 
 const ContentSecurityPolicy = [
   "default-src 'self'",
-  "script-src 'self' 'unsafe-inline'", // TODO: replace with nonce once middleware is wired
+  "script-src 'self' 'unsafe-inline' 'unsafe-eval'", // TODO: replace with nonce once middleware is wired
   "style-src 'self' 'unsafe-inline'", // Tailwind inlines styles; tighten with nonce when ready
   "img-src 'self' data: https://images.unsplash.com",
   "font-src 'self'",

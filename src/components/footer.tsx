@@ -23,6 +23,9 @@ export async function Footer() {
           <NextLink href="/contact" className="hover:text-foreground transition-colors">
             {t('contact')}
           </NextLink>
+          <NextLink href="/privacy" className="hover:text-foreground transition-colors">
+            {t('privacyPolicy')}
+          </NextLink>
         </nav>
       </div>
     </footer>
