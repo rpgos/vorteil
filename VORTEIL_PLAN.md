@@ -314,7 +314,7 @@ Route `/users/profile`.
 
 8. i18n keys reused from registration where possible.
 
-# 12. User public profile
+# 12. User public profile [DONE]
 
 Route `/users/[userId]`. "Public" here means visible to _logged-in users only_ — guests are redirected to `/login`. No SEO indexing.
 
@@ -342,7 +342,7 @@ Reusable SEO primitives. Apply per-page in later sections.
 
 1. Create `src/lib/seo/metadata.ts` with `buildMetadata({ title, description, locale, path, image?, noindex? })` returning a `Metadata` object including OG and Twitter card defaults.
 
-2. Defaults: site name "Vorteil", default OG image at `/og-default.png` (create a simple branded image; replace later).
+2. Defaults: site name "Vorteil", default OG image at `/og-default.jpg` (create a simple branded image; replace later).
 
 3. Create `src/lib/seo/jsonld.ts` with typed builders for `Organization`, `SportsEvent`, `BreadcrumbList`. Render via `<script type="application/ld+json">` inside the relevant server components.
 
@@ -391,7 +391,7 @@ Route `/leagues`. **Public** — indexed for SEO so city-based queries (like "te
 
 4. Empty state: "No leagues yet in your city." Show an admin-only CTA "Create a league" linking to `/leagues/create`.
 
-5. Metadata: strong title (e.g., "Amateur tennis leagues in Germany · Vorteil") and description built via `buildMetadata`. **Indexable.** Render `BreadcrumbList` JSON-LD (Home → Leagues) and an `ItemList` JSON-LD containing the visible leagues so structured search results can surface them.
+5. Metadata: strong title (e.g., "Amateur tennis leagues · Vorteil") and description built via `buildMetadata`. **Indexable.** Render `BreadcrumbList` JSON-LD (Home → Leagues) and an `ItemList` JSON-LD containing the visible leagues so structured search results can surface them.
 
 6. i18n keys for filters, status labels, empty state, CTA, and the page title/description.
 

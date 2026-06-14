@@ -1,4 +1,3 @@
-import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { Geist_Mono } from 'next/font/google';
 import { ThemeProvider } from 'next-themes';
@@ -25,11 +24,6 @@ const bricolage = localFont({
   src: '../../../public/fonts/BricolageGrotesque.ttf',
   variable: '--font-bricolage-grotesque',
 });
-
-export const metadata: Metadata = {
-  title: 'Vorteil - Amateur League',
-  description: 'A competitive amateur league for the sport of your choice.',
-};
 
 export function generateStaticParams() {
   return routing.locales.map(locale => ({ locale }));
