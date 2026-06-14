@@ -336,7 +336,7 @@ Route `/users/[userId]`. "Public" here means visible to _logged-in users only_ â
 
 7. Tests: guest redirected to `/login`; unknown `userId` 404s; head-to-head only renders when viewing another user.
 
-# 13. SEO scaffolding
+# 13. SEO scaffolding [DONE]
 
 Reusable SEO primitives. Apply per-page in later sections.
 

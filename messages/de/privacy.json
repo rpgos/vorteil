@@ -1,0 +1,19 @@
+{
+  "pageTitle": "Datenschutzerklärung · Vorteil",
+  "pageDescription": "Wie Vorteil Ihre personenbezogenen Daten erhebt, nutzt und schützt.",
+  "heading": "Datenschutzerklärung",
+  "lastUpdated": "Zuletzt aktualisiert: Juni 2026",
+  "intro": "Dies ist eine vorläufige Datenschutzerklärung. Sie wird vor dem öffentlichen Launch von Vorteil durch einen rechtlich geprüften Text ersetzt. Durch die Nutzung dieses Dienstes bestätigen Sie, dass Ihre Daten wie nachfolgend beschrieben verarbeitet werden.",
+  "dataCollectedTitle": "Erhobene Daten",
+  "dataCollectedBody": "Wir erheben die bei der Registrierung angegebenen Daten (Name, E-Mail-Adresse, Stadt, Spielniveau, Heimatverein, Schlaghand) sowie die von Ihnen eingetragenen Spielergebnisse. Zahlungsdaten werden nicht erhoben.",
+  "dataUseTitle": "Verwendung Ihrer Daten",
+  "dataUseBody": "Ihre Daten werden verwendet, um Ihr Konto zu betreiben, Ihr Spielerprofil anderen eingeloggten Nutzern anzuzeigen, Ligaergebnisse zu berechnen und transaktionale E-Mails zu versenden. Wir verkaufen Ihre Daten nicht an Dritte.",
+  "dataStorageTitle": "Datenspeicherung",
+  "dataStorageBody": "Die Daten werden auf Supabase (PostgreSQL) innerhalb der EU gespeichert. Wir setzen Verschlüsselung bei der Übertragung (TLS) und im Ruhezustand ein.",
+  "dataRetentionTitle": "Datenspeicherdauer",
+  "dataRetentionBody": "Wir speichern Ihre Daten, solange Ihr Konto aktiv ist. Sie können jederzeit die Löschung Ihres Kontos und aller zugehörigen Daten in den Profileinstellungen beantragen.",
+  "cookiesTitle": "Cookies",
+  "cookiesBody": "Wir verwenden ein einziges Sitzungscookie, um Sie angemeldet zu halten. Es werden keine Tracking-Cookies von Drittanbietern eingesetzt.",
+  "contactTitle": "Kontakt",
+  "contactBody": "Für datenschutzbezogene Anfragen kontaktieren Sie uns unter privacy@vorteil.app."
+}

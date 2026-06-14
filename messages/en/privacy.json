@@ -1,0 +1,19 @@
+{
+  "pageTitle": "Privacy Policy · Vorteil",
+  "pageDescription": "How Vorteil collects, uses, and protects your personal data.",
+  "heading": "Privacy Policy",
+  "lastUpdated": "Last updated: June 2026",
+  "intro": "This is a placeholder privacy policy. It will be replaced with legally reviewed copy before the public launch of Vorteil. By using this service you acknowledge that your data is processed as described below.",
+  "dataCollectedTitle": "Data we collect",
+  "dataCollectedBody": "We collect the information you provide during registration (name, email address, city, skill level, home club, dominant hand) and the match results you submit. We do not collect any payment information.",
+  "dataUseTitle": "How we use your data",
+  "dataUseBody": "Your data is used to operate your account, display your player profile to other logged-in users, compute league standings, and send transactional emails (e.g. magic-link sign-in, match notifications). We do not sell your data to third parties.",
+  "dataStorageTitle": "Data storage",
+  "dataStorageBody": "Data is stored on Supabase (PostgreSQL) hosted within the EU. We apply encryption in transit (TLS) and at rest.",
+  "dataRetentionTitle": "Data retention",
+  "dataRetentionBody": "We retain your data for as long as your account is active. You can request deletion of your account and all associated data at any time from your profile settings.",
+  "cookiesTitle": "Cookies",
+  "cookiesBody": "We use a single session cookie to keep you signed in. No third-party tracking cookies are used at this time.",
+  "contactTitle": "Contact",
+  "contactBody": "For privacy-related requests, please contact us at privacy@vorteil.app."
+}

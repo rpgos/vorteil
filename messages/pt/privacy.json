@@ -1,0 +1,19 @@
+{
+  "pageTitle": "Política de Privacidade · Vorteil",
+  "pageDescription": "Como a Vorteil recolhe, utiliza e protege os seus dados pessoais.",
+  "heading": "Política de Privacidade",
+  "lastUpdated": "Última atualização: junho de 2026",
+  "intro": "Esta é uma política de privacidade provisória. Será substituída por texto com revisão jurídica antes do lançamento público da Vorteil. Ao utilizar este serviço, reconhece que os seus dados são tratados conforme descrito abaixo.",
+  "dataCollectedTitle": "Dados que recolhemos",
+  "dataCollectedBody": "Recolhemos as informações fornecidas durante o registo (nome, endereço de e-mail, cidade, nível de jogo, clube, mão dominante) e os resultados de jogos que submete. Não recolhemos dados de pagamento.",
+  "dataUseTitle": "Como utilizamos os seus dados",
+  "dataUseBody": "Os seus dados são utilizados para gerir a sua conta, mostrar o seu perfil a outros utilizadores autenticados, calcular classificações de liga e enviar e-mails transacionais. Não vendemos os seus dados a terceiros.",
+  "dataStorageTitle": "Armazenamento de dados",
+  "dataStorageBody": "Os dados são armazenados no Supabase (PostgreSQL) alojado na UE. Aplicamos encriptação em trânsito (TLS) e em repouso.",
+  "dataRetentionTitle": "Retenção de dados",
+  "dataRetentionBody": "Retemos os seus dados enquanto a sua conta estiver ativa. Pode solicitar a eliminação da sua conta e de todos os dados associados a qualquer momento nas definições do perfil.",
+  "cookiesTitle": "Cookies",
+  "cookiesBody": "Utilizamos um único cookie de sessão para manter a sessão iniciada. Não são utilizados cookies de rastreamento de terceiros.",
+  "contactTitle": "Contacto",
+  "contactBody": "Para pedidos relacionados com privacidade, contacte-nos em privacy@vorteil.app."
+}
