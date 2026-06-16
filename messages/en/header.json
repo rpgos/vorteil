@@ -2,6 +2,7 @@
   "login": "Login",
   "logout": "Logout",
   "leagues": "Leagues",
+  "createLeague": "Create league",
   "profile": "Profile",
   "howItWorks": "How it Works"
 }

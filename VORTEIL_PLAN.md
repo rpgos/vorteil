@@ -376,7 +376,7 @@ Reusable SEO primitives. Apply per-page in later sections.
 
 7. Update GitHub Actions to run `tsc --noEmit` and `pnpm audit --prod` (or equivalent) on PRs.
 
-# 15. Leagues index
+# 15. Leagues index [DONE]
 
 Route `/leagues`. **Public** — indexed for SEO so city-based queries (like "tennis league Berlin") can find us.
 

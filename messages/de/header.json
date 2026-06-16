@@ -2,6 +2,7 @@
   "login": "Anmelden",
   "logout": "Abmelden",
   "leagues": "Ligen",
+  "createLeague": "Liga erstellen",
   "profile": "Profil",
   "howItWorks": "So funktioniert's"
 }
