@@ -397,7 +397,7 @@ Route `/leagues`. **Public** — indexed for SEO so city-based queries (like "te
 
 7. _Future improvement worth noting_: switch from `/leagues?city=berlin` to a path-based `/leagues/[city]` route. Path-based URLs typically rank better for city-targeted queries. Out of scope for now; left here so we don't forget.
 
-# 16. League creation
+# 16. League creation [DONE]
 
 Route `/leagues/create`. Admin-only.
 
