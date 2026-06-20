@@ -17,6 +17,7 @@ import { LeagueJoinButton } from '@/components/league-join-button';
 import { LeagueStartSeasonButton } from '@/components/league-start-season-button';
 import { computeLeaderboard, formatScore } from '@/lib/ranking/leagueRanking';
 import type { League } from '@/types/db/leagues';
+import { Tabs } from '@heroui/react';
 
 type Props = {
   params: Promise<{ locale: string; leagueId: string }>;
@@ -67,11 +68,6 @@ export default async function LeaguePage({ params, searchParams }: Props) {
   const leaderboard = computeLeaderboard(memberships, allUsers, matches, scoresDb.getByMatch);
 
   const currentMembership = session ? (memberships.find(m => m.userId === session.userId) ?? null) : null;
-
-  // Validate and resolve active tab
-  const activeTab = LEAGUE_TABS.includes(tab as (typeof LEAGUE_TABS)[number])
-    ? (tab as (typeof LEAGUE_TABS)[number])
-    : 'leaderboard';
 
   const tabLabels: Record<(typeof LEAGUE_TABS)[number], string> = {
     leaderboard: t('tabLeaderboard'),
@@ -192,67 +188,10 @@ export default async function LeaguePage({ params, searchParams }: Props) {
         </div>
 
         {/* Tabs */}
-        <LeagueTabBar leagueId={leagueId} activeTab={activeTab} labels={tabLabels} />
+        <LeagueTabBar leagueId={leagueId} leaderboard={leaderboard} labels={tabLabels} session={session} />
 
         {/* Tab content */}
         <div className="mt-6">
-          {/* ─── Leaderboard ─── */}
-          {activeTab === 'leaderboard' && (
-            <div>
-              {leaderboard.length === 0 ? (
-                <p className="text-center text-sm text-foreground/60">{t('leaderboardEmpty')}</p>
-              ) : (
-                <div className="overflow-x-auto">
-                  <table className="w-full text-sm">
-                    <thead>
-                      <tr className="border-b border-divider text-left text-xs text-foreground/50">
-                        <th className="pb-2 pr-4 font-medium">{t('leaderboardRank')}</th>
-                        <th className="pb-2 pr-4 font-medium">{t('leaderboardPlayer')}</th>
-                        <th className="pb-2 pr-4 text-center font-medium">{t('leaderboardPlayed')}</th>
-                        <th className="pb-2 pr-4 text-center font-medium">{t('leaderboardWon')}</th>
-                        <th className="pb-2 pr-4 text-center font-medium">{t('leaderboardLost')}</th>
-                        <th className="pb-2 pr-4 text-center font-medium">{t('leaderboardSets')}</th>
-                        <th className="pb-2 pr-4 text-center font-medium">{t('leaderboardGames')}</th>
-                        <th className="pb-2 text-center font-medium">{t('leaderboardPoints')}</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {leaderboard.map((row, i) => {
-                        const isCurrentUser = session?.userId === row.userId;
-                        return (
-                          <tr
-                            key={row.userId}
-                            className={[
-                              'border-b border-divider/50 last:border-0',
-                              isCurrentUser ? 'bg-primary/5' : '',
-                            ].join(' ')}
-                          >
-                            <td className="py-3 pr-4 text-foreground/50">{i + 1}</td>
-                            <td className="py-3 pr-4">
-                              <Link href={`/users/${row.userId}`} className="font-medium hover:underline">
-                                {row.name}
-                              </Link>
-                            </td>
-                            <td className="py-3 pr-4 text-center">{row.played}</td>
-                            <td className="py-3 pr-4 text-center">{row.won}</td>
-                            <td className="py-3 pr-4 text-center">{row.lost}</td>
-                            <td className="py-3 pr-4 text-center">
-                              {row.setsWon}–{row.setsLost}
-                            </td>
-                            <td className="py-3 pr-4 text-center">
-                              {row.gamesWon}–{row.gamesLost}
-                            </td>
-                            <td className="py-3 text-center font-semibold">{row.points}</td>
-                          </tr>
-                        );
-                      })}
-                    </tbody>
-                  </table>
-                </div>
-              )}
-            </div>
-          )}
-
           {/* ─── Matches ─── */}
           {activeTab === 'matches' && (
             <div>
