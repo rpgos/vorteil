@@ -38,10 +38,10 @@ export default async function LeaguesPage({ params, searchParams }: Props) {
 
   const t = await getTranslations({ locale, namespace: 'Leagues' });
 
-  const allLeagues = leaguesDb.getAll();
+  const allLeagues = await leaguesDb.getAll();
   const cities = [...new Set(allLeagues.map(l => l.city))].sort();
 
-  const filtered = leaguesDb.getAll({
+  const filtered = await leaguesDb.getAll({
     city: city || undefined,
     status: (status as League['status']) || undefined,
   });
@@ -102,9 +102,10 @@ export default async function LeaguesPage({ params, searchParams }: Props) {
                 <h2 className="mb-4 text-xl font-semibold">{city}</h2>
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                   {cityLeagues.map(league => {
-                    const memberCount = membershipsDb
-                      .getByLeague(league.id)
-                      .filter(m => m.status === 'approved').length;
+                    // TODO: get member count for each league. This is currently commented out because it would require multiple database queries, which could be inefficient. Consider optimizing this by fetching member counts in bulk or caching them.
+                    // const memberCount = membershipsDb
+                    //   .getByLeague(league.id)
+                    //   .filter(m => m.status === 'approved').length;
 
                     const STATUS_LABELS: Record<League['status'], Parameters<typeof t>[0]> = {
                       draft: 'statusDraft',
@@ -118,7 +119,7 @@ export default async function LeaguesPage({ params, searchParams }: Props) {
                       <LeagueCard
                         key={league.id}
                         league={league}
-                        memberCount={memberCount}
+                        memberCount={0}
                         labels={{
                           statusLabel: t(STATUS_LABELS[league.status]),
                           level: league.level,
@@ -132,7 +133,7 @@ export default async function LeaguesPage({ params, searchParams }: Props) {
                               year: 'numeric',
                             }),
                           }),
-                          members: t('members', { count: memberCount }),
+                          members: t('members', { count: 0 }),
                         }}
                       />
                     );

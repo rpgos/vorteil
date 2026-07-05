@@ -1,4 +1,5 @@
 import { createClient } from '@/lib/supabase/server';
+import { createAdminClient } from '@/lib/supabase/admin';
 import type { User, Gender, SkillLevel, DominantHand } from '@/types/db/users';
 import type { Role } from '@/types/auth';
 
@@ -73,4 +74,14 @@ export async function update(
 
   const { data: row } = await supabase.from('users').update(patch).eq('id', id).select().single();
   return row ? fromRow(row as Record<string, unknown>) : null;
+}
+
+/**
+ * Deletes the user from auth.users, which cascades to public.users.
+ * Requires the service-role key — never call from client-side code.
+ */
+export async function remove(id: string): Promise<void> {
+  const admin = createAdminClient();
+  const { error } = await admin.auth.admin.deleteUser(id);
+  if (error) throw error;
 }
