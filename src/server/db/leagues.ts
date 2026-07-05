@@ -1,105 +1,99 @@
-import type { League } from '@/types/db/leagues';
+import { createClient } from '@/lib/supabase/server';
+import type { League, LeagueStatus } from '@/types/db/leagues';
 
-const seed: League[] = [
-  {
-    id: 'l1',
-    name: 'Berlin Summer League 2026',
-    city: 'Berlin',
-    levelRange: { min: 6, max: 14 },
-    level: 'intermediate',
-    regularSeasonRounds: 8,
-    hasPlayoffs: true,
-    regularSeasonEnd: new Date('2026-08-31T23:59:59Z'),
-    playoffsEnd: new Date('2026-09-30T23:59:59Z'),
-    maxParticipants: 16,
-    description: 'The premier amateur tennis league in Berlin. Round-robin format with playoffs.',
-    status: 'in_season',
-    createdBy: 'u2',
-    createdAt: new Date('2026-03-01T08:00:00Z'),
-  },
-  {
-    id: 'l2',
-    name: 'München Open 2026',
-    city: 'München',
-    level: null,
-    regularSeasonRounds: 6,
-    hasPlayoffs: false,
-    regularSeasonEnd: new Date('2026-07-31T23:59:59Z'),
-    playoffsEnd: null,
-    maxParticipants: null,
-    description: 'Open-level league welcoming all skill levels.',
-    status: 'open',
-    createdBy: 'u2',
-    createdAt: new Date('2026-03-15T10:00:00Z'),
-  },
-  {
-    id: 'l3',
-    name: 'Berlin Autumn League 2026',
-    city: 'Berlin',
-    level: 'advanced',
-    regularSeasonRounds: 5,
-    hasPlayoffs: true,
-    regularSeasonEnd: new Date('2026-10-31T23:59:59Z'),
-    playoffsEnd: new Date('2026-11-30T23:59:59Z'),
-    maxParticipants: 12,
-    description: 'Competitive league for mid to high-level players.',
-    status: 'playoffs',
-    createdBy: 'u2',
-    createdAt: new Date('2026-04-01T09:00:00Z'),
-  },
-  {
-    id: 'l4',
-    name: 'Berlin Autumn League 2025',
-    city: 'Berlin',
-    level: 'advanced',
-    regularSeasonRounds: 5,
-    hasPlayoffs: true,
-    regularSeasonEnd: new Date('2025-10-31T23:59:59Z'),
-    playoffsEnd: new Date('2025-11-30T23:59:59Z'),
-    maxParticipants: 12,
-    description: 'Competitive league for mid to high-level players.',
-    status: 'finished',
-    createdBy: 'u2',
-    createdAt: new Date('2025-04-01T09:00:00Z'),
-  },
-];
-
-const store = new Map<string, League>(seed.map(l => [l.id, l]));
+function fromRow(row: Record<string, unknown>): League {
+  return {
+    id: row.id as string,
+    name: row.name as string,
+    city: row.city as string,
+    countryCode: row.country_code as string,
+    levelRange:
+      row.level_range_min != null && row.level_range_max != null
+        ? { min: row.level_range_min as number, max: row.level_range_max as number }
+        : null,
+    level: row.level as string | null,
+    regularSeasonRounds: row.regular_season_rounds as number,
+    matchmakingType: row.matchmaking_type as League['matchmakingType'],
+    hasPlayoffs: row.has_playoffs as boolean,
+    regularSeasonEnd: new Date(row.regular_season_end as string),
+    playoffsEnd: row.playoffs_end ? new Date(row.playoffs_end as string) : null,
+    maxParticipants: row.max_participants as number | null,
+    description: row.description as string | null,
+    status: row.status as LeagueStatus,
+    createdBy: row.created_by as string,
+    createdAt: new Date(row.created_at as string),
+  };
+}
 
 export type LeagueFilters = {
   city?: string;
-  status?: League['status'];
+  status?: LeagueStatus;
   levelMin?: number;
   levelMax?: number;
 };
 
-export function getAll(filters?: LeagueFilters): League[] {
-  let results = Array.from(store.values());
-  if (filters?.city) results = results.filter(l => l.city === filters.city);
-  if (filters?.status) results = results.filter(l => l.status === filters.status);
-  if (filters?.levelMin != null)
-    results = results.filter(l => l.levelRange == null || l.levelRange.max >= filters.levelMin!);
-  if (filters?.levelMax != null)
-    results = results.filter(l => l.levelRange == null || l.levelRange.min <= filters.levelMax!);
-  return results;
+export async function getAll(filters?: LeagueFilters): Promise<League[]> {
+  const supabase = await createClient();
+  let query = supabase.from('leagues').select('*');
+
+  if (filters?.city) query = query.eq('city', filters.city);
+  if (filters?.status) query = query.eq('status', filters.status);
+  if (filters?.levelMin != null) query = query.or(`level_range_max.gte.${filters.levelMin},level_range_max.is.null`);
+  if (filters?.levelMax != null) query = query.or(`level_range_min.lte.${filters.levelMax},level_range_min.is.null`);
+
+  const { data } = await query;
+  return (data ?? []).map(row => fromRow(row as Record<string, unknown>));
 }
 
-export function getById(id: string): League | null {
-  return store.get(id) ?? null;
+export async function getById(id: string): Promise<League | null> {
+  const supabase = await createClient();
+  const { data } = await supabase.from('leagues').select('*').eq('id', id).single();
+  return data ? fromRow(data as Record<string, unknown>) : null;
 }
 
-export function create(data: Omit<League, 'createdAt'>): League {
-  console.log('[DB STUB] leagues.create', { id: data.id, name: data.name });
-  const league: League = { ...data, createdAt: new Date() };
-  store.set(league.id, league);
-  return league;
+export async function create(data: Omit<League, 'createdAt'>): Promise<void> {
+  const supabase = await createClient();
+  const { error } = await supabase.from('leagues').insert({
+    id: data.id,
+    name: data.name,
+    city: data.city,
+    country_code: data.countryCode,
+    level_range_min: data.levelRange?.min ?? null,
+    level_range_max: data.levelRange?.max ?? null,
+    level: data.level,
+    regular_season_rounds: data.regularSeasonRounds,
+    matchmaking_type: data.matchmakingType,
+    has_playoffs: data.hasPlayoffs,
+    regular_season_end: data.regularSeasonEnd.toISOString(),
+    playoffs_end: data.playoffsEnd?.toISOString() ?? null,
+    max_participants: data.maxParticipants,
+    description: data.description,
+    status: data.status,
+    created_by: data.createdBy,
+  });
+  if (error) throw error;
 }
 
-export function update(id: string, data: Partial<Omit<League, 'id' | 'createdAt'>>): League | null {
-  const existing = store.get(id);
-  if (!existing) return null;
-  console.log('[DB STUB] leagues.update', { id });
-  const updated: League = { ...existing, ...data };
-  store.set(id, updated);
-  return updated;
+export async function update(id: string, data: Partial<Omit<League, 'id' | 'createdAt'>>): Promise<League | null> {
+  const supabase = await createClient();
+  const patch: Record<string, unknown> = {};
+  if (data.name !== undefined) patch.name = data.name;
+  if (data.city !== undefined) patch.city = data.city;
+  if (data.countryCode !== undefined) patch.country_code = data.countryCode;
+  if (data.levelRange !== undefined) {
+    patch.level_range_min = data.levelRange?.min ?? null;
+    patch.level_range_max = data.levelRange?.max ?? null;
+  }
+  if (data.level !== undefined) patch.level = data.level;
+  if (data.regularSeasonRounds !== undefined) patch.regular_season_rounds = data.regularSeasonRounds;
+  if (data.matchmakingType !== undefined) patch.matchmaking_type = data.matchmakingType;
+  if (data.hasPlayoffs !== undefined) patch.has_playoffs = data.hasPlayoffs;
+  if (data.regularSeasonEnd !== undefined) patch.regular_season_end = data.regularSeasonEnd.toISOString();
+  if (data.playoffsEnd !== undefined) patch.playoffs_end = data.playoffsEnd?.toISOString() ?? null;
+  if (data.maxParticipants !== undefined) patch.max_participants = data.maxParticipants;
+  if (data.description !== undefined) patch.description = data.description;
+  if (data.status !== undefined) patch.status = data.status;
+
+  const { data: row } = await supabase.from('leagues').update(patch).eq('id', id).select().single();
+  return row ? fromRow(row as Record<string, unknown>) : null;
 }

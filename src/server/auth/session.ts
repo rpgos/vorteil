@@ -1,7 +1,5 @@
-import { cookies } from 'next/headers';
-import { Role } from '@/types/auth';
-
-const COOKIE_NAME = 'vorteil_session';
+import { createClient } from '@/lib/supabase/server';
+import type { Role } from '@/types/auth';
 
 export type Session = {
   userId: string;
@@ -12,40 +10,28 @@ export type Session = {
 
 /**
  * Returns the current session or null. Safe to call on public pages.
- * Stub implementation: reads a dev cookie or the VORTEIL_DEV_SESSION env var.
- * Replace with real Supabase session lookup in Section 8.
+ * Reads the Supabase session and looks up the user's profile to determine
+ * registration completeness and roles.
  */
 export async function getOptionalSession(): Promise<Session | null> {
-  // Allow a dev session injected via env var for UI development without auth flow.
-  if (process.env.VORTEIL_DEV_SESSION) {
-    try {
-      return JSON.parse(process.env.VORTEIL_DEV_SESSION) as Session;
-    } catch {
-      console.warn('[AUTH STUB] Invalid VORTEIL_DEV_SESSION env var — ignoring.');
-    }
-  }
+  const supabase = await createClient();
+  const {
+    data: { user },
+    error,
+  } = await supabase.auth.getUser();
+  if (error || !user?.email) return null;
 
-  const cookieStore = await cookies();
-  const raw = cookieStore.get(COOKIE_NAME)?.value;
-  if (!raw) return null;
+  const { data: profile } = await supabase.from('users').select('roles').eq('id', user.id).single();
 
-  try {
-    return JSON.parse(raw) as Session;
-  } catch {
-    return null;
-  }
-}
-
-export async function setSession(session: Session): Promise<void> {
-  const cookieStore = await cookies();
-  cookieStore.set(COOKIE_NAME, JSON.stringify(session), {
-    httpOnly: true,
-    path: '/',
-    sameSite: 'lax',
-  });
+  return {
+    userId: user.id,
+    email: user.email,
+    registrationComplete: profile != null,
+    roles: (profile?.roles as Role[]) ?? [],
+  };
 }
 
 export async function clearSession(): Promise<void> {
-  const cookieStore = await cookies();
-  cookieStore.delete(COOKIE_NAME);
+  const supabase = await createClient();
+  await supabase.auth.signOut();
 }

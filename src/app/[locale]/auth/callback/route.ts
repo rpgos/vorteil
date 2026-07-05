@@ -1,20 +1,31 @@
 import { type NextRequest, NextResponse } from 'next/server';
-import { setSession } from '@/server/auth/session';
+import { createClient } from '@/lib/supabase/server';
 
 export async function GET(request: NextRequest, { params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params;
-  const provider = request.nextUrl.searchParams.get('provider') ?? 'magic-link';
+  const code = request.nextUrl.searchParams.get('code');
 
-  console.log(`[DB STUB] Would create/lookup user via ${provider}`);
+  if (code) {
+    const supabase = await createClient();
+    const {
+      data: { user },
+      error,
+    } = await supabase.auth.exchangeCodeForSession(code);
 
-  // Stub: always treat as a new registration-incomplete user.
-  // Real implementation: exchange token with Supabase, look up or create User row.
-  await setSession({
-    userId: 'stub-user-1',
-    email: 'stub@example.com',
-    registrationComplete: true,
-    roles: ['player'],
-  });
+    if (error) {
+      const loginUrl = new URL(`/${locale}/login`, request.url);
+      loginUrl.searchParams.set('error', 'auth');
+      return NextResponse.redirect(loginUrl);
+    }
 
-  return NextResponse.redirect(new URL(`/`, request.url));
+    if (user) {
+      const { data: profile } = await supabase.from('users').select('id').eq('id', user.id).single();
+
+      if (!profile) {
+        return NextResponse.redirect(new URL(`/${locale}/register`, request.url));
+      }
+    }
+  }
+
+  return NextResponse.redirect(new URL(`/${locale}`, request.url));
 }
