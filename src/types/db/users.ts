@@ -13,7 +13,6 @@ export type User = {
   lkLevel: number | null;
   /** Required when lkLevel is null */
   level: SkillLevel;
-  city: string;
   dominantHand: DominantHand | null;
   homeClub: string | null;
   roles: Role[];

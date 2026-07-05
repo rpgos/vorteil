@@ -10,9 +10,11 @@ export type League = {
   id: string;
   name: string;
   city: string;
+  countryCode: string;
   levelRange?: LevelRange | null;
   level: string | null;
   regularSeasonRounds: number;
+  matchmakingType: 'round_robin' | 'swiss' | 'custom';
   hasPlayoffs: boolean;
   regularSeasonEnd: Date;
   playoffsEnd: Date | null;
